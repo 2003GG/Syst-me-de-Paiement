@@ -7,25 +7,16 @@ class Paiement{
         $this->montant=$montant;
         $this->statu= $statu;
     }
-    public function setpaiement(){
-        $db=new database();
-        $conect= $db->getconection();
-        $sql= "INSERT TABLE paiements(montant,statu_pai)VALUES(:montant,:statu)";
-        $result=$conect->prepare($sql);
-        $result->bindParam(":montat",$this->montant);
-        $result->bindParam(":statu",$this->statu);
+   
 
-    }
+  public function setId($id){
+      if(!is_numeric($id) || $id <=0){
+         echo"Ce Id: " .$this->$id."n'existe pas";
+         return;
+      }
+
+  }
+
 }
-$montant=readline("montant : ");
-echo"valide\n";
-echo"en attent\n";
-echo"invalid\n";
-
-$statu=readline("statu : ");
-$pi=new Paiement($montant,$statu);
-$pi->setpaiement();
-
-
 ?>
  

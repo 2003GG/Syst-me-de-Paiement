@@ -13,6 +13,7 @@ class database
 
             $this->pdo = new PDO($dsn, $this->user, $this->password);
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            echo'kolchi mezyan';
         } catch (PDOException $e) {
             echo "failed" . $e->getMessage();
         }

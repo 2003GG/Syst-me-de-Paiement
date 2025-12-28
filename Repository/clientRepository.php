@@ -1,34 +1,41 @@
 <?php 
-include_once __DIR__ . "/../database/dataconect.php";
-include_once __DIR__ . "/../src/client.php";
+require_once  "../database/dataconect.php";
+require_once  "../src/client.php";
 
-class Clientrepository {
+class ClientRepository{
     private $pdo;
-    private $cl;
+ 
     public function __construct(){
       $this->pdo= new database()->getconection();
    
     }
-      public function setaddclient($cl)
+      public function creat($client)
 {      
      
-       $cl = new clients();
-      $email = $this->$cl->email;
-      $nom =$this->$cl->nom;
-    
-   
-    
      $sql = "INSERT INTO clients (nom,email) VALUES (:nom ,:email)";
    
     $stmt = $this->pdo->prepare($sql);
-    $stmt->bindParam(":nom", $nom);
-    $stmt->bindParam(":email", $email);
-    $stmt->execute();
-    
-   echo "Client added successfully!\n";
-   return $cl;
+            $result = $stmt->fetchAll(mode: PDO::FETCH_OBJ);
 
-}    
+    $clients = [];
+        foreach ($result as $obj) {
+
+            $cl = new Clients($obj->name, $obj->email);
+            $cl->setId($obj->id);
+            array_push($clients, $cl);
+        }
+
+        return $clients;
+
+
+}  
+  public function getAllClients() {
+        $sql = "SELECT * FROM clients";
+        $stmt = $this->pdo->query($sql);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+}  
+
 }
 
 
