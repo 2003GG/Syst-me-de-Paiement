@@ -1,6 +1,6 @@
 <?php 
-include_once "../database/dataconect.php";
-
+require_once  "../database/dataconect.php";
+require_once "../src/paiement.php";
 
 class PaiementRepository{
 

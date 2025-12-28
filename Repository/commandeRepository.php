@@ -1,5 +1,6 @@
 <?php
-include_once "../database/dataconect.php";
+include_once  "../database/dataconect.php";
+include_once "../src/commande.php";
 
 class CommandeRepository {
     private $pdo;
@@ -21,5 +22,18 @@ class CommandeRepository {
     }
     return $commande;
 
+}
+public function findAll(){
+  $sql = "SELECT * FROM commandes";
+
+  $stmt= $this->pdo->prepare($sql);
+  $stmt->execute();
+  $all=$stmt->fetchAll(PDO::FETCH_OBJ);
+ $commandes = [];
+  foreach ($all as $obj) {
+    $commandes = new Clients($obj->name, $obj->email);
+
+  }
+  return $commandes;
 }
 }

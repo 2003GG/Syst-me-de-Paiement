@@ -1,9 +1,13 @@
 <?php 
-include_once __DIR__ . "/../database/dataconect.php";
+
 class Paiement{
     private $montant;
     private $statu;
-    public function __construct($montant,$statu){
+
+    public const STATU_VALID = "valid";
+    public const STATU_EN_ATTENT="en attent";
+    const STATU_NOT_VALID = "invalide";
+    public function __construct($montant,$statu=self::STATU_EN_ATTENT){
         $this->montant=$montant;
         $this->statu= $statu;
     }
